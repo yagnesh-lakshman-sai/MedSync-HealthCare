@@ -1,0 +1,19 @@
+package com.medsync.clients;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.medsync.dto.PatientResponseDto;
+
+@FeignClient("PatientManagement")
+public interface PatientClient {
+
+	@GetMapping("/patients/getPatientName/{patientId}")
+	String getPatientName(@PathVariable(name="patientId") String patientId);
+	
+	@GetMapping("/patients/{id}")
+	public ResponseEntity<PatientResponseDto> getPatientById(@PathVariable(name="id") String patientId);
+
+}
